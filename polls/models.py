@@ -11,6 +11,10 @@ class Question(models.Model):
     def was_published_recently(self):
         return self.addtime >= timezone.now() - datetime.timedelta(days=1)
 
+    # was_published_recently.admin_order_field = addtime
+    # was_published_recently.boolean = True
+    # was_published_recently.short_description = 'published rencently ?'
+
     def __str__(self):
         return self.content
 

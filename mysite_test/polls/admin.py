@@ -6,8 +6,7 @@ from .models import *
 
 class ChoiceInline(admin.TabularInline):
     model = Choice
-    extra = 2
-    # fk_name = 'question_id'
+    extra = 3
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -15,6 +14,10 @@ class QuestionAdmin(admin.ModelAdmin):
         ('日期', {'fields': ['addtime']}),
     ]
     inlines = [ChoiceInline]
+    list_display = ['content', 'addtime', 'was_published_recently']
+    list_filter = ['addtime', 'content']
+    list_per_page = 15
+    search_fields = ['content', 'addtime']
 
 class ChoiceAdmin(admin.ModelAdmin):
     pass
@@ -22,4 +25,4 @@ class ChoiceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Question, QuestionAdmin)
-#admin.site.register(Choice, ChoiceAdmin)
+admin.site.register(Choice, ChoiceAdmin)
